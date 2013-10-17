@@ -1,0 +1,9 @@
+function FirstFactorial(num) { 
+
+  for(i=(num-1);i>0;i--){
+    var result = num * i;
+    var num = result;
+  }
+  return num; 
+         
+}
