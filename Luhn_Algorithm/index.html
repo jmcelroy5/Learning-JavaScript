@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Luhn Algorithm</title>
+
+    <link href="./bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="./style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+
+    <script id="template" type="text/template">
+      <span class="number"></span> should be <span class="expected"></span>. Test returns <span class="result"></span>.
+    </script>
+
+    <div id="wrap">
+      <div class="container">
+        <div class="page-header">
+          <h1>Luhn Algorithm</h1>
+        </div>
+
+        <p class="lead">Modify the function declaration in luhn.js in this directory until the tests pass.</p>
+        <p class="lead">You can find a description of the luhn algorithm here: <a href="http://rosettacode.org/wiki/Luhn_test_of_credit_card_numbers">http://rosettacode.org/wiki/Luhn_test_of_credit_card_numbers</a></p>
+
+        <div id="results"></div>
+      </div>
+    </div>
+
+    <script src="./luhn.js"></script>
+    <script>
+      var numbers = {
+        '4111111111111111': true,
+        '378282246310005': true,
+        '49927398716': true,
+        '1234567812345670': true,
+        '371449635398431': true,
+        '30569309025904': true,
+        '6011111111111117': true,
+        '3530111333300000': true,
+        '5555555555554444': true,
+        '4112111111111111': false,
+        '378382246310005': false,
+        '49927398717': false,
+        '1234567812345678': false,
+        '61789372994': true
+      };
+
+      var template = document.getElementById('template').innerHTML;
+      var resultsEl = document.getElementById('results');
+
+      for (var number in numbers) {
+        var result = luhn(number);
+        var el = document.createElement('p');
+
+        el.innerHTML = template;
+
+        el.querySelector('.number').innerHTML = number.toString();
+        el.querySelector('.expected').innerHTML = numbers[number] ? "Valid" : "Invalid";
+        el.querySelector('.expected').className = numbers[number] ? "label label-success" : "label label-danger";
+        el.querySelector('.result').innerHTML = result ? "Valid" : "Invalid";
+        el.querySelector('.result').className = result ? "label label-success" : "label label-danger";
+
+        resultsEl.appendChild(el);
+      }
+    </script>
+  </body>
+</html>
+
