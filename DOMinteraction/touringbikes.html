@@ -1,0 +1,73 @@
+<!DOCTYPE html>    
+<body>
+    <table>
+        <caption>Touring Bikes</caption>
+        <thead>  
+            <tr>   
+                <th>Model</th>  
+                <th>Picture</th>  
+                <th>Price</th>  
+                <th>Material</th>  
+                <th>Weight</th>  
+                <th>Notes</th>  
+            </tr>
+        </thead>
+        <tbody></tbody>   
+    </table>  
+</body>  
+
+<script>
+
+var tourBikes = [
+{
+  model: "REI Novara",
+  price: "$899",
+  material: "Steel",
+  weight: "29.89 lbs",
+  notes: "Advantage: REI customer service",
+  picture: "http://www.rei.com/media/kk/651a7c68-d4b3-424e-a400-1d7d5f684368.jpg"
+},{
+  model: "All-City Space Horse",
+  price: "$1450",
+  material: "ChroMoly steel",
+  weight: "24.9 lbs",
+  notes: "Found for $1000 on Craigslist",
+  picture: "http://www.huckleberrybicycles.com/wp-content/uploads/2013/04/BK1317.jpg"
+},{
+  model: "Surly Long Haul Trucker",
+  price: "$1300",
+  material: "ChroMoly steel",
+  weight: "not available",
+  notes: "gold standard touring bike",
+  picture: "http://www.rei.com/media/tt/a854d67a-3a4d-4943-8229-9788e33a2b77.jpg"
+}];
+
+for (var i = 0; i < tourBikes.length; i++){
+
+  var row = document.createElement("tr");
+  var bike = tourBikes[i];
+
+for (var key in bike){
+
+ //if (bike.hasOwnProperty(key)){
+
+  var cell = document.createElement("td"); 
+
+  if (key == "picture"){
+    var img = document.createElement('img');
+    img.src = bike[key];
+    img.width = '200';
+    var model = img;
+  } else {
+    var model = document.createTextNode(bike[key]);
+  }
+
+  cell.appendChild(model);
+  row.appendChild(cell);
+  
+  }
+
+  document.getElementsByTagName("tbody")[0].appendChild(row);
+}
+
+</script>
