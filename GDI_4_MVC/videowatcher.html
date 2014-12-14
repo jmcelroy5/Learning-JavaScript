@@ -59,7 +59,9 @@ window.VideoCollection = function(videoJsonArray){
 };
 
 VideoCollection.prototype.sort = function(){
-  console.log("this inside video collection proto method:", this);
+  this.items.sort(function(video1,video2){
+    return (video1.title.localeCompare(video2.title));
+  });
 }
 
 /* We could also load this data in using AJAX from the server.*/
@@ -131,7 +133,7 @@ var addVideoToList = function(video) {
 $(document).ready(function() {
   // call video collection function on the array of video json objects
   var videoCollection = new VideoCollection(videosJSON);
-
+  videoCollection.sort();
   for (var i = 0; i < videoCollection.items.length; i++) {
     addVideoToList(videoCollection.items[i]);
   }
