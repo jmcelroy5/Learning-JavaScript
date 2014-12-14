@@ -50,7 +50,7 @@ var VideoModel = function(videoJSON){
   this.thumbnailUrl = generateThumbnailUrl(this.youtubeId);
 }
 
-window.VideoCollection = function(videoJsonArray){
+var VideoCollection = function(videoJsonArray){
   this.items = [];
   for (i = 0; i < videoJsonArray.length; i++){
       var video = new VideoModel(videoJsonArray[i]);
@@ -100,7 +100,7 @@ var generateEmbedUrl = function(youtubeId) {
 var addVideoToList = function(video) {
   var videoLink = $('<a>');
   videoLink.append(video.title);
-  var linkUrl = videoLink.attr('href');
+  // var linkUrl = videoLink.attr('href');
   var thumbnailUrl = generateThumbnailUrl(video.youtubeId);
   var thumbnailImg = $('<img>');
   thumbnailImg.attr('src', thumbnailUrl);

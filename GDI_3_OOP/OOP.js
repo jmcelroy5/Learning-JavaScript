@@ -72,7 +72,7 @@ videosToCreate = [
     },
     { //musicvideo
     title: "Hit Me Baby One More Time",
-    uploader: "Sarah Mosesian",
+    uploader: "Sarah",
     artist: "Britney Spears",
     seconds: 60
     }];
