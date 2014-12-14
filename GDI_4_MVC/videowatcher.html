@@ -96,46 +96,54 @@ var generateEmbedUrl = function(youtubeId) {
   return 'http://www.youtube.com/embed/' + youtubeId;
 };
 
-/* Adds a video to the list */
-var addVideoToList = function(video) {
+var VideoItem = function(video){
+  // create a link tag with video title as the text
   var videoLink = $('<a>');
   videoLink.append(video.title);
-  // var linkUrl = videoLink.attr('href');
-  var thumbnailUrl = generateThumbnailUrl(video.youtubeId);
+
+  // create image tag and set source as thumbnail URL
   var thumbnailImg = $('<img>');
-  thumbnailImg.attr('src', thumbnailUrl);
+  thumbnailImg.attr('src', video.thumbnailUrl);
+  // append image to videoLink tag
   videoLink.append(thumbnailImg);
     
   /* On click, we'll make a modal with the title and video iframe */
   videoLink.on('click', function(e) {
     e.preventDefault();
 
+    // assembling the modal content
     var videoTitle = $('<h2>');
     videoTitle.html(video.title + ' <small>' + video.author + '</small>');
     var videoEmbed = $('<iframe></iframe>');
-    videoEmbed.attr('src', generateEmbedUrl(video.youtubeId));
+    videoEmbed.attr('src', video.embedUrl);
     videoEmbed.attr('width', 560);
     videoEmbed.attr('height', 315);
 
+    // remove video modal if it's already on page
     $('.video-modal').remove();
+    // else create the video modal
     var videoModal = $('<div class="video-modal">');
     videoModal.append(videoTitle);
     videoModal.append(videoEmbed);
     $('body').append(videoModal);
   });
 
+  // create list item element and stuff the content in it
   var videoItem = $('<li>');
   videoItem.append(videoLink);
-  $('#videos-list').append(videoItem);
-};
 
+  // return <li> 
+  return videoItem 
+}
 
 $(document).ready(function() {
   // call video collection function on the array of video json objects
   var videoCollection = new VideoCollection(videosJSON);
   videoCollection.sort();
+  videoList = $('#videos-list');
   for (var i = 0; i < videoCollection.items.length; i++) {
-    addVideoToList(videoCollection.items[i]);
+    videoItem = new VideoItem(videoCollection.items[i]);
+    videoList.append(videoItem);
   }
 });
 
